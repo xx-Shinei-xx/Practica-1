@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import binom
 import streamlit as st
-from IPython.display import YouTubeVideo
+ 
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
 
@@ -17,7 +17,7 @@ listas = {
 }
 
 # Función para mostrar el histograma y el video de YouTube
-def plot_histogram_and_video(dataset, m, hist_color, fit_color, mean_color, std_dev_color, youtube_link):
+def plot_histogram_and_video(dataset, m, hist_color, fit_color, mean_color, std_dev_color):
     # Obtener los datos
     data = listas[dataset][:m]
     
@@ -62,6 +62,6 @@ hist_color = st.sidebar.color_picker('Color del histograma:', value='blue')
 fit_color = st.sidebar.color_picker('Color del ajuste:', value='red')
 mean_color = st.sidebar.color_picker('Color del valor mínimo:', value='green')
 std_dev_color = st.sidebar.color_picker('Color de la desviación estándar:', value='orange')
-youtube_link = st.sidebar.text_input('Enlace de YouTube:', '')
 
-plot_histogram_and_video(dataset, m, hist_color, fit_color, mean_color, std_dev_color, youtube_link)
+
+plot_histogram_and_video(dataset, m, hist_color, fit_color, mean_color, std_dev_color)
