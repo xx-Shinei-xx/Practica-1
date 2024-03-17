@@ -1,6 +1,8 @@
 import matplotlib.pyplot as plt
 from scipy.stats import binom
 import streamlit as st
+import numpy as np
+
 from pydub import AudioSegment
 from pydub.playback import play
 
