@@ -67,7 +67,7 @@ mean_color = st.sidebar.color_picker('Color del valor mínimo:', value='green')
 std_dev_color = st.sidebar.color_picker('Color de la desviación estándar:', value='orange')
 
 # Botón para reproducir música
-music_file_path = "ruta/al/archivo/musical.mp3"  # Ruta a tu archivo de música
+music_file_path = "https://github.com/xx-Shinei-xx/Practica-1/blob/main/Minecraft.mp3"   
 if st.sidebar.button('Reproducir música'):
     play_music(music_file_path)
 
