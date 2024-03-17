@@ -3,6 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import binom
 
+
+import pygame
 #para la musica
 from pydub import AudioSegment
 from pydub.playback import play
@@ -85,6 +87,25 @@ uploaded_file = st.file_uploader("Seleccionar archivo", type=["mp3", "wav"])
 # Reproducir audio si se ha cargado un archivo
 if uploaded_file is not None:
     st.audio(uploaded_file.read(), format='audio/wav')
+
+
+
+# Inicializar Pygame
+pygame.init()
+
+# Título de la aplicación
+st.title('Reproductor de Audio Automático')
+
+# Canción de fondo (puedes cambiar la ruta a la canción que desees)
+cancion = "Minecraft.mp3"  # Cambia "cancion.mp3" por la ruta de tu archivo de audio
+
+# Reproducir la canción de fondo
+pygame.mixer.music.load(cancion)
+pygame.mixer.music.play(loops=-1)  # "-1" significa que la canción se repetirá indefinidamente
+
+# Mensaje para el usuario
+st.write("Reproduciendo la canción automáticamente. ¡Disfruta!")
+
 
 
 # Botón para reproducir música
