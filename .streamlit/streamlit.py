@@ -13,7 +13,7 @@ def play_music(file_url):
     play(audio)
 
 # URL directa del archivo de música en GitHub
-music_file_url = "https://github.com/xx-Shinei-xx/Practica-1/raw/branch/folder/Minecraft.mp3"
+music_file_url = "raw/branch/folder/file.mp3"
 
 
 
