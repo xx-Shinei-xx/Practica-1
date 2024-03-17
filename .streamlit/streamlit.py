@@ -51,7 +51,7 @@ def plot_histogram(dataset, m, hist_color, fit_color, mean_color, std_dev_color)
 
 # Crear la interfaz de usuario con Streamlit
 def main():
-    st.title('Ajuste Binomial y Histograma Interactivo')
+    st.title('Ajuste Binomial e Histograma Interactivo')
     dataset = st.selectbox('Selecciona un conjunto de datos:', list(listas.keys()))
     m = st.slider('Selecciona el valor de m:', 1, 100, 10)
     hist_color = st.color_picker('Color del histograma:', '#00f')
