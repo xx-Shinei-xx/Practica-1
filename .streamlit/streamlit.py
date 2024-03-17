@@ -3,6 +3,19 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import binom
 
+#para la musica
+from pydub import AudioSegment
+from pydub.playback import play
+
+# Función para reproducir música
+def play_music(file_url):
+    audio = AudioSegment.from_file(file_url)
+    play(audio)
+
+# URL directa del archivo de música en GitHub
+music_file_url = "https://github.com/xx-Shinei-xx/Practica-1/raw/main/Minecraft.mp3"
+
+
 # Datos de las caras de las monedas
 listas = {
      "Guillermo y Shawn": [2, 4, 5, 3, 7, 3, 4, 6, 4, 4, 3, 5, 3, 2, 3, 4, 8, 6, 4, 2, 5, 5, 3, 8, 4, 7, 4, 6, 3, 5, 8, 7, 3, 3, 6, 5, 4, 4, 5, 2, 5, 3, 7, 6, 3, 6, 5, 2, 4, 6, 5, 4, 6, 3, 6, 5, 3, 7, 8, 7, 4, 4, 4, 8, 5, 4, 3, 5, 7, 5, 2, 2, 3, 5, 1, 6, 4, 6, 4, 4, 3, 3, 6, 6, 3, 4, 5, 5, 5, 7, 6, 7, 4, 3, 5, 4, 5, 7, 6, 5],
@@ -60,6 +73,13 @@ def main():
     std_dev_color = st.color_picker('Color de la desviación estándar:', '#ffa500')
 
     plot_histogram(dataset, m, hist_color, fit_color, mean_color, std_dev_color)
+
+
+# Botón para reproducir música
+if st.button('Reproducir música'):
+    play_music(music_file_url)
+
+
 
 if __name__ == '__main__':
     main()
