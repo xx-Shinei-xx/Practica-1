@@ -89,22 +89,25 @@ if uploaded_file is not None:
 
 
 
- 
 
+
+
+#-----------------------
 # Título de la aplicación
-st.title('Reproductor de Audio Automático')
+st.title('Reproductor de Spotify')
 
-# URL directa del archivo de música en GitHub
-music_file_url = "https://github.com/xx-Shinei-xx/Practica-1/raw/main/Minecraft.mp3"
+# Enlace a la canción de Spotify
+spotify_link = st.text_input("Introduce el enlace de la canción de Spotify:")
 
-# Función para reproducir música
-def play_music(file_url):
-    audio = AudioSegment.from_file(file_url)
-    play(audio)
+# Mostrar el reproductor si se proporciona un enlace válido de Spotify
+if spotify_link.startswith("https://open.spotify.com/"):
+    st.write(f"Reproduciendo la canción desde {spotify_link}")
+    st.write(f'<iframe src="https://open.spotify.com/embed/track/{spotify_link.split("/")[-1]}" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>', unsafe_allow_html=True)
+else:
+    st.write("Introduce un enlace válido de Spotify.")
 
-# Reproducir la música automáticamente
-if st.button('Reproducir música'):
-    play_music(music_file_url)
+
+#------------------------
 
 
 # Botón para reproducir música
