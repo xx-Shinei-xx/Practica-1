@@ -2,9 +2,8 @@ import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import binom
-
-
-import pygame
+  
+ 
 #para la musica
 from pydub import AudioSegment
 from pydub.playback import play
@@ -90,22 +89,22 @@ if uploaded_file is not None:
 
 
 
-# Inicializar Pygame
-pygame.init()
+ 
 
 # Título de la aplicación
 st.title('Reproductor de Audio Automático')
 
-# Canción de fondo (puedes cambiar la ruta a la canción que desees)
-cancion = " https://github.com/xx-Shinei-xx/Practica-1/blob/main/Minecraft.mp3"  # Cambia "cancion.mp3" por la ruta de tu archivo de audio
+# URL directa del archivo de música en GitHub
+music_file_url = "https://github.com/xx-Shinei-xx/Practica-1/raw/main/Minecraft.mp3"
 
-# Reproducir la canción de fondo
-pygame.mixer.music.load(cancion)
-pygame.mixer.music.play(loops=-1)  # "-1" significa que la canción se repetirá indefinidamente
+# Función para reproducir música
+def play_music(file_url):
+    audio = AudioSegment.from_file(file_url)
+    play(audio)
 
-# Mensaje para el usuario
-st.write("Reproduciendo la canción automáticamente. ¡Disfruta!")
-
+# Reproducir la música automáticamente
+if st.button('Reproducir música'):
+    play_music(music_file_url)
 
 
 # Botón para reproducir música
