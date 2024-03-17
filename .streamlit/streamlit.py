@@ -4,7 +4,7 @@ from scipy.stats import binom
 import streamlit as st
 from IPython.display import YouTubeVideo
 st.set_option('deprecation.showPyplotGlobalUse', False)
-st.video('https://www.youtube.com/watch?v=7pAr6B7fqyM&rco=1') 
+
 
 
 # Definir los datos
