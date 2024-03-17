@@ -97,7 +97,7 @@ pygame.init()
 st.title('Reproductor de Audio Automático')
 
 # Canción de fondo (puedes cambiar la ruta a la canción que desees)
-cancion = "Minecraft.mp3"  # Cambia "cancion.mp3" por la ruta de tu archivo de audio
+cancion = " https://github.com/xx-Shinei-xx/Practica-1/blob/main/Minecraft.mp3"  # Cambia "cancion.mp3" por la ruta de tu archivo de audio
 
 # Reproducir la canción de fondo
 pygame.mixer.music.load(cancion)
