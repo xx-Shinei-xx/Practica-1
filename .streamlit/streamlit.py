@@ -75,6 +75,17 @@ def main():
 
     plot_histogram(dataset, m, hist_color, fit_color, mean_color, std_dev_color)
 
+# Título de la aplicación
+st.title('Reproductor de Audio')
+
+# Subir archivo de audio
+st.write("Por favor, sube una canción:")
+uploaded_file = st.file_uploader("Seleccionar archivo", type=["mp3", "wav"])
+
+# Reproducir audio si se ha cargado un archivo
+if uploaded_file is not None:
+    st.audio(uploaded_file.read(), format='audio/wav')
+
 
 # Botón para reproducir música
 if st.button('Reproducir música'):
