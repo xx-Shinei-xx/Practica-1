@@ -48,10 +48,7 @@ def plot_histogram_and_video(dataset, m, hist_color, fit_color, mean_color, std_
     plt.legend()
     plt.grid(True)
     
-    # Mostrar el video de YouTube
-    if youtube_link:
-        st.write("Video de YouTube:")
-        st.write(YouTubeVideo(youtube_link))
+     
 
     st.pyplot()
 
@@ -65,3 +62,6 @@ std_dev_color = st.sidebar.color_picker('Color de la desviación estándar:', va
 
 
 plot_histogram_and_video(dataset, m, hist_color, fit_color, mean_color, std_dev_color)
+
+if __name__ == '__main__':
+    main()
