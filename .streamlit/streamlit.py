@@ -13,7 +13,8 @@ def play_music(file_url):
     play(audio)
 
 # URL directa del archivo de música en GitHub
-music_file_url = "https://www.youtube.com/watch?v=cjQQ9JYGgTM"
+music_file_url = "https://github.com/xx-Shinei-xx/Practica-1/raw/branch/folder/Minecraft.mp3"
+
 
 
 # Datos de las caras de las monedas
