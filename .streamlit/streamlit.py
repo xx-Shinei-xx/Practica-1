@@ -7,7 +7,7 @@ st.markdown(
     """
     <style>
     .reportview-container {
-        background: url('background_image.jpg') no-repeat center center fixed;
+        background: url('hubble-sees-a-dying-stars-final-moments_20149292766_o~orig.jpg') no-repeat center center fixed;
         background-size: cover;
     }
     </style>
