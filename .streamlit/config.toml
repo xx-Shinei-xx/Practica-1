@@ -2,6 +2,6 @@
 BACKGROUND_IMAGE_URL = 'https://images-assets.nasa.gov/image/hubble-sees-a-dying-stars-final-moments_20149292766_o/hubble-sees-a-dying-stars-final-moments_20149292766_o~orig.jpg'
 base="dark"
 primaryColor="#f00000"
-backgroundColor="#170404"
+#backgroundColor="#170404"
 [deprecation]
 showPyplotGlobalUse = false
