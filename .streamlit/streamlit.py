@@ -13,27 +13,25 @@ listas = {
     "Jacobo y Cesar": [6, 6, 5, 3, 2, 5, 7, 8, 4, 5, 3, 4, 7, 6, 8, 4, 2, 3, 7, 2, 7, 6, 2, 5, 8, 2, 4, 4, 5, 5, 3, 6, 3, 5, 6, 6, 3, 6, 7, 3, 5, 4, 5, 4, 3, 5, 6, 4, 7, 4, 7, 6, 4, 6, 7, 6, 7, 4, 2, 4, 3, 4, 5, 5, 7, 4, 5, 4, 2, 4, 7, 5, 3, 5, 5, 4, 4, 6, 5, 4, 4, 4, 5, 4, 6, 6, 6, 8, 3, 5, 7, 3, 4, 8, 4, 6, 5, 4, 6, 4]
 }
 
-# Función para calcular el ajuste binomial y graficar el histograma
+# Función para plotear el histograma y el ajuste
 def plot_histogram_and_fit(data, m, hist_color, fit_color, mean_color, std_dev_color):
-    # Seleccionar los primeros m datos
+    # Obtener los datos
     data_selected = data[:m]
     
-    # Calcular la media y la desviación estándar de los datos seleccionados
+    # para la grafica y sus colores
     mean = np.mean(data_selected)
     std_dev = np.std(data_selected)
     
-    # Calcular p para el ajuste binomial
-    p = mean / len(data_selected)
-    
-    # Histograma de los datos
+    # Para el histograma
     plt.hist(data_selected, bins=np.arange(min(data_selected), max(data_selected)+1)-0.5, density=True, alpha=0.6, color=hist_color, edgecolor='black', linewidth=1.2, label='Datos experimentales')
     
-    # Ajuste binomial
+    # Fit de la distribución binomial
     x = np.arange(0, max(data_selected)+1)
     n = len(x)
-    y = binom.pmf(x, n, p, loc=0)
+    p = mean / n
+    y = binom.pmf(x, n, p)
     
-    # Graficar el ajuste binomial
+    # Para el ajuste
     plt.plot(x, y, 'r--', linewidth=1.5, label=f'Ajuste Binomial\nMedia: {mean:.2f}\nDesviación Estándar: {std_dev:.2f}')
     
     # Graficar la media y la desviación estándar
@@ -70,14 +68,7 @@ def main():
     std_dev_color = st.color_picker('Color de la desviación estándar:', '#ffa500')
 
     plot_histogram_and_fit(data_selected, m, hist_color, fit_color, mean_color, std_dev_color)
-
-    # Calcular la desviación estándar y p
-    std_dev = np.std(data_selected)
-    p = np.mean(data_selected) / len(data_selected)
-
-    # Mostrar resultados
-    st.write(f"Desviación estándar experimental: {std_dev:.2f}")
-    st.write(f"Valor calculado para p: {p:.2f}")
+ 
 
 if __name__ == '__main__':
     main()
