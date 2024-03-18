@@ -31,7 +31,7 @@ def plot_histogram_and_fit(data, m, hist_color, fit_color, mean_color, std_dev_c
     # Ajuste binomial
     x = np.arange(0, max(data_selected)+1)
     n = len(x)
-    y = binom.pmf(x, n, p)
+    y = binom.pmf(x, n, p, loc=0)
     
     # Graficar el ajuste binomial
     plt.plot(x, y, 'r--', linewidth=1.5, label=f'Ajuste Binomial\nMedia: {mean:.2f}\nDesviación Estándar: {std_dev:.2f}')
