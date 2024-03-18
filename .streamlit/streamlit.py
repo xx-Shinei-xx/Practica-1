@@ -58,7 +58,6 @@ def main():
     st.write(f'Desviación estándar (ajuste binomial): {std_dev:.2f}')
     st.write(f'Valor de p (ajuste binomial): {p:.2f}')
     st.write(f'Conteo medio de caras (experimental): {np.mean(data):.2f}')
-    st.write(f'Desviación estándar (experimental): {np.std(data):.2f}')
     st.write('---')
 
     # Para el histograma
