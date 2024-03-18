@@ -1,7 +1,7 @@
 import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.stats import binom
+import scipy.stats as ss
 
 # datos de las caras de las monedas
 listas = {
@@ -22,13 +22,14 @@ def get_histogram_data(dataset, m):
 
 def plot_histogram(data, mean, std_dev, hist_color, fit_color, mean_color, std_dev_color):
     # Plotear el histograma
-    plt.hist(data, bins=np.arange(min(data), max(data)+1)-0.5, density=True, alpha=0.6, color=hist_color, edgecolor='black', linewidth=1.2, label='Datos experimentales')
+    plt.hist(data, bins=np.arange(min(data), max(data)+2)-0.5, density=True, alpha=0.6, color=hist_color, edgecolor='black', linewidth=1.2, label='Datos experimentales')
 
     # fit de la distribución binomial
-    x = np.arange(0, max(data)+1)
-    n = len(x)
-    p = mean / n
-    y = binom.pmf(x, n, p)
+    fitted_results = ss.fit(ss.binom, data, bounds=[(0, 100), (0, 1)])
+    n, p = fitted_results[0], fitted_results[2]
+
+    x = np.arange(min(data), max(data)+1)
+    y = ss.binom.pmf(x, n, p)
 
     # Plotear el ajuste
     plt.plot(x, y, 'r--', linewidth=1.5, label=f'Ajuste Binomial\nMedia: {mean:.2f}\nDesviación Estándar: {std_dev:.2f}')
@@ -59,4 +60,9 @@ std_dev_color = st.color_picker('Color de la desviación estándar:', value='ora
 data, mean, std_dev = get_histogram_data(dataset, m)
 
 # plotear el histograma
+
 plot_histogram(data, mean, std_dev, hist_color, fit_color, mean_color, std_dev_color)
+
+
+if _name_ == '_main_':
+    main()
