@@ -1,61 +1,68 @@
 import streamlit as st
-import numpy as np
-import matplotlib.pyplot as plt
 import pandas as pd
+import numpy as np
 import scipy.stats as ss
+import matplotlib.pyplot as plt
 
-# Función para plotear el histograma y el ajuste
-def plot_histogram(dataset, m, hist_color, fit_color, mean_color, std_dev_color):
-    # Obtener los datos
-    if dataset == "todos":
-        data = pd.concat(listas.values())[:m]
-    else:
-        data = listas[dataset][:m]
+# Cargar datos del archivo CSV
+@st.cache
+def load_data():
+    return pd.read_csv('Binomial-fichas.csv')
 
-    # Crear histograma
-    plt.hist(data, bins=np.arange(min(data), max(data) + 1) - 0.5, density=True, alpha=0.6, color=hist_color,
-             edgecolor='black', linewidth=1.2, label='Datos experimentales')
+data = load_data()
 
-    # Ajuste de la distribución binomial
-    fitted_results = ss.fit(ss.binom, data, bounds=[(0, 100), (0, 1)])
-    p, n = fitted_results[0]
-    x = np.arange(0, max(data) + 1)
-    y = ss.binom.pmf(x, n, p)
+st.title('Histograma y ajuste de distribución binomial')
 
-    # Para el ajuste
-    plt.plot(x, y, 'r--', linewidth=1.5,
-             label=f'Ajuste Binomial\nProbabilidad de éxito (p): {p:.2f}\nNúmero de ensayos (n): {n:.2f}')
+# Selección de la cantidad de lanzamientos de monedas (m)
+m = st.slider('Selecciona la cantidad de lanzamientos de monedas (m)', min_value=0, max_value=100, value=50)
 
-    plt.xlabel('Número de Caras')
-    plt.ylabel('Densidad de probabilidad')
-    plt.title(f'Histograma y Ajuste Binomial para los primeros {m} tiros del conjunto de datos "{dataset}"')
-    plt.legend()
-    plt.grid(True)
+# Seleccionar los primeros m lanzamientos de cada moneda
+data_selected = data.loc[:, :'Coin_10'].head(m)
 
-    # Ajustar la posición del cuadro de texto
-    plt.tight_layout()
+# Calcular el conteo de caras para cada conjunto de lanzamientos de monedas
+counts = data_selected.sum(axis=1)
 
-    st.pyplot()
+# Crear el histograma de los conteos de caras
+fig, ax = plt.subplots()
+ax.hist(counts, bins=np.arange(0, 11, 1), density=True, alpha=0.5, color='blue', label='Histograma')
 
-# Crear la interfaz de usuario
-def main():
-    st.title('Ajuste Binomial y Histograma Interactivo')
-    dataset = st.selectbox('Selecciona un conjunto de datos:', ["Clase"] + list(listas.keys()))
+# Ajustar una distribución binomial a los datos
+fitted_results = ss.binom.fit(counts, loc=0, scale=1)
 
-    if dataset == "Clase":
-        dataset_selected = "todos"
-    else:
-        dataset_selected = dataset
+# Generar la distribución binomial ajustada
+x = np.arange(0, 11, 1)
+binomial_dist = ss.binom.pmf(x, *fitted_results)
 
-    m = st.slider('Selecciona el valor de m:', 1, 500, 100)
-    hist_color = st.color_picker('Color del histograma:', '#00f')
-    fit_color = st.color_picker('Color del ajuste:', '#f00')
-    mean_color = st.color_picker('Color del valor mínimo:', '#0f0')
-    std_dev_color = st.color_picker('Color de la desviación estándar:', '#ffa500')
+# Graficar la distribución binomial ajustada
+ax.plot(x, binomial_dist, 'r-', label='Distribución Binomial Ajustada')
 
-    plot_histogram(dataset_selected, m, hist_color, fit_color, mean_color, std_dev_color)
+# Mostrar los valores obtenidos del ajuste
+st.write("Parámetros del ajuste de la distribución binomial (n, p):", fitted_results)
 
+# Calcular el conteo medio de caras y su desviación estándar experimentalmente
+mean_count = np.mean(counts)
+std_count = np.std(counts)
 
-if __name__ == '__main__':
-    main()
+st.write("Conteo medio de caras experimental:", mean_count)
+st.write("Desviación estándar experimental del conteo de caras:", std_count)
 
+# Calcular el conteo medio de caras y su desviación estándar obtenidos del ajuste
+mean_count_fit = ss.binom.mean(*fitted_results)
+std_count_fit = ss.binom.std(*fitted_results)
+
+st.write("Conteo medio de caras obtenido del ajuste:", mean_count_fit)
+st.write("Desviación estándar del conteo de caras obtenida del ajuste:", std_count_fit)
+
+# Configuración del gráfico
+ax.set_xlabel('Conteo de caras')
+ax.set_ylabel('Densidad')
+ax.set_title(f'Distribución del conteo de caras de los primeros {m} tiros de 10 monedas')
+ax.legend()
+ax.grid(True)
+
+# Mostrar el gráfico en Streamlit
+st.pyplot(fig)
+
+if __name__ == "__main__":
+    valores_de_n_y_p()
+    
