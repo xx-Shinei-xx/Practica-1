@@ -26,7 +26,10 @@ def plot_histogram(data, mean, std_dev, hist_color, fit_color, mean_color, std_d
 
     # fit de la distribución binomial
     fitted_results = ss.fit(ss.binom, data, bounds=[(0, 100), (0, 1)])
-    n, _, p = fitted_results
+ 
+
+     n, p = binom.fit(data)
+    
 
     x = np.arange(min(data), max(data)+1)
     y = ss.binom.pmf(x, n, p)
