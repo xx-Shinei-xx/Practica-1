@@ -13,24 +13,43 @@ listas = {
     "Jacobo y Cesar": [6, 6, 5, 3, 2, 5, 7, 8, 4, 5, 3, 4, 7, 6, 8, 4, 2, 3, 7, 2, 7, 6, 2, 5, 8, 2, 4, 4, 5, 5, 3, 6, 3, 5, 6, 6, 3, 6, 7, 3, 5, 4, 5, 4, 3, 5, 6, 4, 7, 4, 7, 6, 4, 6, 7, 6, 7, 4, 2, 4, 3, 4, 5, 5, 7, 4, 5, 4, 2, 4, 7, 5, 3, 5, 5, 4, 4, 6, 5, 4, 4, 4, 5, 4, 6, 6, 6, 8, 3, 5, 7, 3, 4, 8, 4, 6, 5, 4, 6, 4]
 }
 
-# Función para plotear el histograma y el ajuste
+# Función para calcular el ajuste binomial y graficar el histograma
 def plot_histogram_and_fit(data, m, hist_color, fit_color, mean_color, std_dev_color):
-    # Obtener los datos
+    # Seleccionar los primeros m datos
     data_selected = data[:m]
     
-    # para la grafica y sus colores
+    # Calcular la media y la desviación estándar de los datos seleccionados
     mean = np.mean(data_selected)
     std_dev = np.std(data_selected)
     
-    # Calcular p
-    n = len(data_selected)
-    p = mean / n
+    # Calcular p para el ajuste binomial
+    p = mean / len(data_selected)
     
-    # Fit de la distribución binomial
+    # Histograma de los datos
+    plt.hist(data_selected, bins=np.arange(min(data_selected), max(data_selected)+1)-0.5, density=True, alpha=0.6, color=hist_color, edgecolor='black', linewidth=1.2, label='Datos experimentales')
+    
+    # Ajuste binomial
     x = np.arange(0, max(data_selected)+1)
+    n = len(x)
     y = binom.pmf(x, n, p)
     
-    return data_selected, mean, std_dev, p, y
+    # Graficar el ajuste binomial
+    plt.plot(x, y, 'r--', linewidth=1.5, label=f'Ajuste Binomial\nMedia: {mean:.2f}\nDesviación Estándar: {std_dev:.2f}')
+    
+    # Graficar la media y la desviación estándar
+    plt.axvline(x=min(data_selected), color=mean_color, linestyle='-', linewidth=2, label=f'Valor mínimo: {min(data_selected)}')
+    plt.axvline(x=mean, color=std_dev_color, linestyle='-', linewidth=2, label=f'Desviación estándar: {std_dev:.2f}')
+
+    plt.xlabel('Número de Caras')
+    plt.ylabel('Densidad de probabilidad')
+    plt.title(f'Histograma y Ajuste Binomial para los primeros {m} tiros del conjunto de datos')
+    plt.legend()
+    plt.grid(True)
+
+    # Ajustar la posición del cuadro de texto
+    plt.tight_layout()
+
+    st.pyplot()
 
 # Crear la interfaz de usuario 
 def main():
@@ -50,37 +69,15 @@ def main():
     mean_color = st.color_picker('Color del valor mínimo:', '#0f0')
     std_dev_color = st.color_picker('Color de la desviación estándar:', '#ffa500')
 
-    data, mean, std_dev, p, y = plot_histogram_and_fit(data_selected, m, hist_color, fit_color, mean_color, std_dev_color)
+    plot_histogram_and_fit(data_selected, m, hist_color, fit_color, mean_color, std_dev_color)
 
-    st.write('---')
-    st.header('Valores obtenidos del ajuste y medidos experimentalmente:')
-    st.write(f'Conteo medio de caras (ajuste binomial): {mean:.2f}')
-    st.write(f'Desviación estándar (ajuste binomial): {std_dev:.2f}')
-    st.write(f'Valor de p (ajuste binomial): {p:.2f}')
-    st.write(f'Conteo medio de caras (experimental): {np.mean(data):.2f}')
-    st.write(f'Desviación estándar (experimental): {np.std(data):.2f}')
-    st.write('---')
+    # Calcular la desviación estándar y p
+    std_dev = np.std(data_selected)
+    p = np.mean(data_selected) / len(data_selected)
 
-    # Para el histograma
-    plt.hist(data, bins=np.arange(min(data), max(data)+1)-0.5, density=True, alpha=0.6, color=hist_color, edgecolor='black', linewidth=1.2, label='Datos experimentales')
-    
-    # Para el ajuste
-    plt.plot(np.arange(len(y)), y, 'r--', linewidth=1.5, label=f'Ajuste Binomial\nMedia: {mean:.2f}\nDesviación Estándar: {std_dev:.2f}')
-    
-    # Graficar la media y la desviación estándar
-    plt.axvline(x=min(data), color=mean_color, linestyle='-', linewidth=2, label=f'Valor mínimo: {min(data)}')
-    plt.axvline(x=mean, color=std_dev_color, linestyle='-', linewidth=2, label=f'Desviación estándar: {std_dev:.2f}')
-
-    plt.xlabel('Número de Caras')
-    plt.ylabel('Densidad de probabilidad')
-    plt.title(f'Histograma y Ajuste Binomial para los primeros {m} tiros del conjunto de datos')
-    plt.legend()
-    plt.grid(True)
-
-    # Ajustar la posición del cuadro de texto
-    plt.tight_layout()
-
-    st.pyplot()
+    # Mostrar resultados
+    st.write(f"Desviación estándar experimental: {std_dev:.2f}")
+    st.write(f"Valor calculado para p: {p:.2f}")
 
 if __name__ == '__main__':
     main()
