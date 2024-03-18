@@ -48,7 +48,7 @@ def main():
     hist_color = st.color_picker('Color del histograma:', '#00f')
     fit_color = st.color_picker('Color del ajuste:', '#f00')
     mean_color = st.color_picker('Color del valor mínimo:', '#0f0')
-    std_dev_color = st.color_picker('Color de la desviación estándar:', '#ffa500')
+    #std_dev_color = st.color_picker('Color de la desviación estándar:', '#ffa500')
 
     data, mean, std_dev, p, y = plot_histogram_and_fit(data_selected, m, hist_color, fit_color, mean_color, std_dev_color)
 
