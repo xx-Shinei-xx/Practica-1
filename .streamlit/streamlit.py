@@ -1,11 +1,5 @@
 
-    
-#Search Page
-if selected=='Graficas':
-    df = pd.read_csv("ConteosDeCarasPorPareja.csv")
-    st.dataframe(df)
-    st.write(f"The DataFrame has {len(df)} rows and {len(df.columns)} columns.")
-    
+
 # Datos de las caras de las monedas
 listas = {
     "Guillermo y Shawn": [2, 4, 5, 3, 7, 3, 4, 6, 4, 4, 3, 5, 3, 2, 3, 4, 8, 6, 4, 2, 5, 5, 3, 8, 4, 7, 4, 6, 3, 5, 8, 7, 3, 3, 6, 5, 4, 4, 5, 2, 5, 3, 7, 6, 3, 6, 5, 2, 4, 6, 5, 4, 6, 3, 6, 5, 3, 7, 8, 7, 4, 4, 4, 8, 5, 4, 3, 5, 7, 5, 2, 2, 3, 5, 1, 6, 4, 6, 4, 4, 3, 3, 6, 6, 3, 4, 5, 5, 5, 7, 6, 7, 4, 3, 5, 4, 5, 7, 6, 5],
