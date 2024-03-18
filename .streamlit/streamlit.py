@@ -26,7 +26,7 @@ def plot_histogram(data, mean, std_dev, hist_color, fit_color, mean_color, std_d
 
     # fit de la distribución binomial
     fitted_results = ss.fit(ss.binom, data, bounds=[(0, 100), (0, 1)])
-    n, p = fitted_results[0], fitted_results[2]
+    n, _, p = fitted_results
 
     x = np.arange(min(data), max(data)+1)
     y = ss.binom.pmf(x, n, p)
@@ -37,6 +37,8 @@ def plot_histogram(data, mean, std_dev, hist_color, fit_color, mean_color, std_d
     # Graficar la media y la desviación estándar
     plt.axvline(x=min(data), color=mean_color, linestyle='-', linewidth=2, label=f'Valor mínimo: {min(data)}')
     plt.axvline(x=mean, color=std_dev_color, linestyle='-', linewidth=2, label=f'Desviación estándar: {std_dev:.2f}')
+
+    st.write(f'Parámetros ajustados (n, p) del ajuste binomial: {n}, {p}')
 
     plt.xlabel('Número de Caras')
     plt.ylabel('Probabilidad')
@@ -61,6 +63,3 @@ data, mean, std_dev = get_histogram_data(dataset, m)
 
 # plotear el histograma
 plot_histogram(data, mean, std_dev, hist_color, fit_color, mean_color, std_dev_color)
-
-if __name__ == '__main__':
-    main()
