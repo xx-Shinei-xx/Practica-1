@@ -51,18 +51,16 @@ st.title('Análisis de lanzamientos de monedas')
 # widgets
 dataset = st.selectbox('Datos de la pareja:', options=list(listas.keys()))
 m = st.slider('Valor de m:', min_value=1, max_value=100, step=1, value=10)
-hist_color = st.color_picker('Color del histograma:', value='blue')
-fit_color = st.color_picker('Color del fit:', value='red')
-mean_color = st.color_picker('Color del valor mínimo:', value='green')
-std_dev_color = st.color_picker('Color de la desviación estándar:', value='orange')
+hist_color = st.text_input('Color del histograma (ejemplo: blue):', value='blue')
+fit_color = st.text_input('Color del fit (ejemplo: red):', value='red')
+mean_color = st.text_input('Color del valor mínimo (ejemplo: green):', value='green')
+std_dev_color = st.text_input('Color de la desviación estándar (ejemplo: orange):', value='orange')
 
 # Obtener los datos
 data, mean, std_dev = get_histogram_data(dataset, m)
 
 # plotear el histograma
-
 plot_histogram(data, mean, std_dev, hist_color, fit_color, mean_color, std_dev_color)
 
-
-if _name_ == '_main_':
+if __name__ == '__main__':
     main()
