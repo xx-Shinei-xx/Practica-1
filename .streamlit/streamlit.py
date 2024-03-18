@@ -1,4 +1,7 @@
-
+import streamlit as st
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import binom
 
 # Datos de las caras de las monedas
 listas = {
@@ -67,5 +70,6 @@ def main():
     plot_histogram_and_fit(data_selected, m, hist_color, fit_color, mean_color, std_dev_color)
  
 
-if _name_ == '_main_':
+if __name__ == '__main__':
     main()
+    
