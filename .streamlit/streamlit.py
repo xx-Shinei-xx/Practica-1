@@ -48,7 +48,7 @@ def main():
     hist_color = st.color_picker('Color del histograma:', '#00f')
     fit_color = st.color_picker('Color del ajuste:', '#f00')
     mean_color = st.color_picker('Color del valor mínimo:', '#0f0')
-    #std_dev_color = st.color_picker('Color de la desviación estándar:', '#ffa500')
+    std_dev_color = st.color_picker('Color de la desviación estándar:', '#ffa500')
 
     data, mean, std_dev, p, y = plot_histogram_and_fit(data_selected, m, hist_color, fit_color, mean_color, std_dev_color)
 
@@ -64,7 +64,7 @@ def main():
     plt.hist(data, bins=np.arange(min(data), max(data)+1)-0.5, density=True, alpha=0.6, color=hist_color, edgecolor='black', linewidth=1.2, label='Datos experimentales')
     
     # Para el ajuste
-    plt.plot(np.arange(len(y)), y, 'r--', linewidth=1.5, label=f'Ajuste Binomial\nMedia: {mean:.2f}\nDesviación Estándar: {std_dev:.2f}')
+   # plt.plot(np.arange(len(y)), y, 'r--', linewidth=1.5, label=f'Ajuste Binomial\nMedia: {mean:.2f}\nDesviación Estándar: {std_dev:.2f}')
     
     # Graficar la media y la desviación estándar
     plt.axvline(x=min(data), color=mean_color, linestyle='-', linewidth=2, label=f'Valor mínimo: {min(data)}')
