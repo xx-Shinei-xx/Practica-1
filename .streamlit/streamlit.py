@@ -68,7 +68,7 @@ def main():
     
     # Graficar la media y la desviación estándar
     plt.axvline(x=min(data), color=mean_color, linestyle='-', linewidth=2, label=f'Valor mínimo: {min(data)}')
-   # plt.axvline(x=mean, color=std_dev_color, linestyle='-', linewidth=2, label=f'Desviación estándar: {std_dev:.2f}')
+    plt.axvline(x=mean, color=std_dev_color, linestyle='-', linewidth=2, label=f'Desviación estándar: {std_dev:.2f}')
 
     #plt.xlabel('Número de Caras')
     #plt.ylabel('Densidad de probabilidad')
