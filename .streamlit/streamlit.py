@@ -2,8 +2,6 @@ import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import binom
-  
- 
 
 # Datos de las caras de las monedas
 listas = {
@@ -42,7 +40,7 @@ def plot_histogram_and_fit(data, m, hist_color, fit_color, mean_color, std_dev_c
 
     plt.xlabel('Número de Caras')
     plt.ylabel('Densidad de probabilidad')
-    plt.title(f'Histograma y Ajuste Binomial para los primeros {m} tiros del conjunto de datos')
+    plt.title(f'Histograma y Ajuste Binomial para los primeros {m} tiros del conjunto de datos seleccionado')
     plt.legend()
     plt.grid(True)
 
@@ -54,25 +52,16 @@ def plot_histogram_and_fit(data, m, hist_color, fit_color, mean_color, std_dev_c
 # Crear la interfaz de usuario 
 def main():
     st.title('Ajuste Binomial y Histograma Interactivo')
-    
-    dataset = st.selectbox('Selecciona un conjunto de datos:', ["Clase"] + list(listas.keys()))
-    
-    if dataset == "Clase":
-        data_selected = [item for sublist in listas.values() for item in sublist]
-        m = 500
-    else:
-        data_selected = listas[dataset]
-        m = st.slider('Selecciona el valor de m:', 1, 100, 10)
-        
+    dataset = st.selectbox('Selecciona un conjunto de datos:', list(listas.keys()))
+    m = 500 if dataset == "Guillermo y Shawn" else st.slider('Selecciona el valor de m:', 1, 100, 10)
     hist_color = st.color_picker('Color del histograma:', '#00f')
     fit_color = st.color_picker('Color del ajuste:', '#f00')
     mean_color = st.color_picker('Color del valor mínimo:', '#0f0')
     std_dev_color = st.color_picker('Color de la desviación estándar:', '#ffa500')
 
-    plot_histogram_and_fit(data_selected, m, hist_color, fit_color, mean_color, std_dev_color)
+    plot_histogram_and_fit(listas[dataset], m, hist_color, fit_color, mean_color, std_dev_color)
  
 
 if __name__ == '__main__':
-    main()
-
+    main() 
 
