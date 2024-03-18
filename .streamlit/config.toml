@@ -1,6 +1,13 @@
+#[theme]
+#base="dark"
+#primaryColor="#f00000"
+#backgroundColor="#170404"
+#[deprecation]
+#showPyplotGlobalUse = false
 [theme]
-base="dark"
-primaryColor="#f00000"
-backgroundColor="#170404"
-[deprecation]
-showPyplotGlobalUse = false
+base="light"
+primaryColor="#f63366"
+backgroundColor="#eef0f2"
+secondaryBackgroundColor="#fafafa"
+textColor="#262730"
+font="sans serif"
