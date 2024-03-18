@@ -22,13 +22,15 @@ def plot_histogram_and_fit(data, m, hist_color, fit_color, mean_color, std_dev_c
     mean = np.mean(data_selected)
     std_dev = np.std(data_selected)
     
+    # Calcular p
+    n = len(data_selected)
+    p = mean / n
+    
     # Fit de la distribución binomial
     x = np.arange(0, max(data_selected)+1)
-    n = len(x)
-    p = mean / n
     y = binom.pmf(x, n, p)
     
-    return data_selected, mean, std_dev, y
+    return data_selected, mean, std_dev, p, y
 
 # Crear la interfaz de usuario 
 def main():
@@ -48,12 +50,13 @@ def main():
     mean_color = st.color_picker('Color del valor mínimo:', '#0f0')
     std_dev_color = st.color_picker('Color de la desviación estándar:', '#ffa500')
 
-    data, mean, std_dev, y = plot_histogram_and_fit(data_selected, m, hist_color, fit_color, mean_color, std_dev_color)
+    data, mean, std_dev, p, y = plot_histogram_and_fit(data_selected, m, hist_color, fit_color, mean_color, std_dev_color)
 
     st.write('---')
     st.header('Valores obtenidos del ajuste y medidos experimentalmente:')
     st.write(f'Conteo medio de caras (ajuste binomial): {mean:.2f}')
     st.write(f'Desviación estándar (ajuste binomial): {std_dev:.2f}')
+    st.write(f'Valor de p (ajuste binomial): {p:.2f}')
     st.write(f'Conteo medio de caras (experimental): {np.mean(data):.2f}')
     st.write(f'Desviación estándar (experimental): {np.std(data):.2f}')
     st.write('---')
